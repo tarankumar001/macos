@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve:{
     alias:{
+      '@':resolve(dirname(fileURLToPath(import.meta.url)),'src' ),
       '#components':resolve(dirname(fileURLToPath(import.meta.url)),'components' ),
       '#constants':resolve(dirname(fileURLToPath(import.meta.url)),'constants' ),
       '#store':resolve(dirname(fileURLToPath(import.meta.url)),'store' ),
