@@ -1,69 +1,10 @@
 import React, { useRef } from "react";
 import useRaf from "@rooks/use-raf";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform
-} from "framer-motion";
-import { useWindowSize } from "react-use";
+import { motion, useMotionValue } from "framer-motion";
 import { dockApps } from "./constants/dockApps";
 import { useStore } from "@/store/useStore";
 import DockItem from "./DockItem";
 
-// Hover animation hook
-const useDockHoverAnimation = (mouseX, ref, dockSize, dockMag) => {
-  const distanceLimit = dockSize * 6;
-
-  const distanceInput = [
-    -distanceLimit,
-    -distanceLimit / (dockMag * 0.65),
-    -distanceLimit / (dockMag * 0.85),
-    0,
-    distanceLimit / (dockMag * 0.85),
-    distanceLimit / (dockMag * 0.65),
-    distanceLimit
-  ];
-
-  const widthOutput = [
-    dockSize,
-    dockSize * (dockMag * 0.55),
-    dockSize * (dockMag * 0.75),
-    dockSize * dockMag,
-    dockSize * (dockMag * 0.75),
-    dockSize * (dockMag * 0.55),
-    dockSize
-  ];
-
-  const beyondTheDistanceLimit = distanceLimit + 1;
-  const distance = useMotionValue(beyondTheDistanceLimit);
-
-  const widthPX = useSpring(
-    useTransform(distance, distanceInput, widthOutput),
-    { stiffness: 1700, damping: 90 }
-  );
-
-  const width = useTransform(widthPX, (w) => `${w / 16}rem`);
-
-  useRaf(() => {
-    const el = ref.current;
-    const mouseXVal = mouseX.get();
-
-    if (el && mouseXVal !== null) {
-      const rect = el.getBoundingClientRect();
-      const imgCenterX = rect.left + rect.width / 2;
-      const distanceDelta = mouseXVal - imgCenterX;
-      distance.set(distanceDelta);
-      return;
-    }
-
-    distance.set(beyondTheDistanceLimit);
-  }, true);
-
-  return { width };
-};
-
-// Main Dock component
 export default function Dock({
   open,
   showApps,
@@ -71,8 +12,14 @@ export default function Dock({
   toggleLaunchpad,
   hide
 }) {
+  const dockRef = useRef(null);
   const dockSize = useStore((state) => state.dockSize);
   const dockMag = useStore((state) => state.dockMag);
+  const magnificationRange = useStore((state) => state.magnificationRange);
+
+  // Motion values for mouse position relative to dock container
+  const mouseX = useMotionValue(null);
+  const dockCenterX = useMotionValue(null);
 
   const openApp = (id) => {
     if (id === "launchpad") toggleLaunchpad(!showLaunchpad);
@@ -82,23 +29,46 @@ export default function Dock({
     }
   };
 
-  const mouseX = useMotionValue(null);
+  // Track mouse position relative to dock container
+  const handleMouseMove = (e) => {
+    if (!dockRef.current) return;
+    const rect = dockRef.current.getBoundingClientRect();
+    const relativeMouse = e.clientX - rect.left;
+    mouseX.set(relativeMouse);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(null);
+    dockCenterX.set(null);
+  };
+
+  // Update dock center position on mount and resize
+  useRaf(() => {
+    if (!dockRef.current) return;
+    const rect = dockRef.current.getBoundingClientRect();
+    dockCenterX.set(rect.left + rect.width / 2);
+  }, true);
+
+  const maxHeight = dockSize * dockMag + 32; // Add padding
 
   return (
     <div
-      className={`dock fixed bottom-1 left-1/2 -translate-x-1/2 ${
-        hide ? "z-0" : "z-50"
+      className={`dock fixed bottom-4 left-1/2 -translate-x-1/2 ${
+        hide ? "z-0 pointer-events-none" : "z-50"
       }`}
     >
-      <ul
-        className="flex space-x-2 items-center px-2 backdrop-blur-2xl bg-white/20 rounded-xl"
-        onMouseMove={(e) => mouseX.set(e.clientX)}
-        onMouseLeave={() => mouseX.set(null)}
+      <motion.ul
+        ref={dockRef}
+        className="flex items-end justify-center gap-3 px-6 py-4 
+        backdrop-blur-2xl bg-white/10 rounded-4xl 
+        border border-white/20 shadow-lg overflow-visible"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         style={{
-          height: `${(dockSize + 15) / 16}rem`
+          minHeight: `${(dockSize ) / 16}rem`,
         }}
       >
-        {dockApps.map((app) => (
+        {dockApps.map((app, index) => (
           <DockItem
             key={`dock-${app.id}`}
             id={app.id}
@@ -108,9 +78,12 @@ export default function Dock({
             openApp={openApp}
             dockSize={dockSize}
             dockMag={dockMag}
+            magnificationRange={magnificationRange}
+            index={index}
+            totalItems={dockApps.length}
           />
         ))}
-      </ul>
+      </motion.ul>
     </div>
   );
 }
