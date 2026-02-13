@@ -16,6 +16,7 @@
     "dayjs": "^1.11.19",
     "framer-motion": "^12.34.0",
     "immer": "^11.1.4",
+    "lucide-react": "^0.564.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-tooltip": "^5.30.0",
