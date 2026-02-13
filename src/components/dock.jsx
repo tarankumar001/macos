@@ -1,31 +1,28 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useRaf from "@rooks/use-raf";
 import { motion, useMotionValue } from "framer-motion";
 import { dockApps } from "./constants/dockApps";
 import { useStore } from "@/store/useStore";
+import useWindowStore from "@/store/widow";
 import DockItem from "./DockItem";
 
-export default function Dock({
-  open,
-  showApps,
-  showLaunchpad,
-  toggleLaunchpad,
-  hide
-}) {
+export default function Dock() {
   const dockRef = useRef(null);
   const dockSize = useStore((state) => state.dockSize);
   const dockMag = useStore((state) => state.dockMag);
   const magnificationRange = useStore((state) => state.magnificationRange);
+  const toggleWindow = useWindowStore((state) => state.toggleWindow);
+  const [showLaunchpad, setShowLaunchpad] = useState(false);
 
   // Motion values for mouse position relative to dock container
   const mouseX = useMotionValue(null);
   const dockCenterX = useMotionValue(null);
 
   const openApp = (id) => {
-    if (id === "launchpad") toggleLaunchpad(!showLaunchpad);
+    if (id === "launchpad") setShowLaunchpad(!showLaunchpad);
     else {
-      toggleLaunchpad(false);
-      open(id);
+      setShowLaunchpad(false);
+      toggleWindow(id);
     }
   };
 
@@ -53,9 +50,7 @@ export default function Dock({
 
   return (
     <div
-      className={`dock fixed bottom-4 left-1/2 -translate-x-1/2 ${
-        hide ? "z-0 pointer-events-none" : "z-50"
-      }`}
+      className="dock fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
     >
       <motion.ul
         ref={dockRef}
