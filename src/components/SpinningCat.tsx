@@ -66,29 +66,32 @@ function SpinningCat() {
   };
 
   const handleAnimationEnd = () => {
-    setTimeout(() => {
-      if (videoRef.current && audioRef.current) {
-        // Pause the cat audio and stop it
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
+    // Animation ends but audio continues playing - don't pause it yet
+    if (audioRef.current) {
+      // Set up listener for when audio finishes
+      const handleAudioEnd = () => {
+        if (videoRef.current) {
+          // Play video after audio finishes
+          videoRef.current.play().catch((error) => {
+            console.error("Video playback failed:", error);
+          });
 
-        // Play video (muted, no audio)
-        videoRef.current.play().catch((error) => {
-          console.error("Video playback failed:", error);
-        });
+          timeoutRef.current = setTimeout(() => {
+            setRunCatVideo(false);
 
-        timeoutRef.current = setTimeout(() => {
-          setRunCatVideo(false);
+            // Exit fullscreen when video ends
+            if (document.fullscreenElement) {
+              document.exitFullscreen().catch((err) => {
+                console.error(`Error attempting to exit fullscreen: ${err.message}`);
+              });
+            }
+          }, 64000);
+        }
+        audioRef.current?.removeEventListener("ended", handleAudioEnd);
+      };
 
-          // Exit fullscreen when video ends
-          if (document.fullscreenElement) {
-            document.exitFullscreen().catch((err) => {
-              console.error(`Error attempting to exit fullscreen: ${err.message}`);
-            });
-          }
-        }, 64000);
-      }
-    }, 500);
+      audioRef.current.addEventListener("ended", handleAudioEnd);
+    }
   };
 
   return (
