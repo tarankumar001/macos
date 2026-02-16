@@ -8,7 +8,6 @@ function SpinningCat() {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const oiiaRef = useRef<HTMLAudioElement | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,7 +25,7 @@ function SpinningCat() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/cat.gif";
+    img.src = "/music/cat.gif";
   }, []);
 
   useEffect(() => {
@@ -42,7 +41,10 @@ function SpinningCat() {
 
   const handleEscape = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (oiiaRef.current) oiiaRef.current.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setRunCatVideo(false);
 
     // Exit fullscreen
@@ -54,24 +56,29 @@ function SpinningCat() {
   };
 
   const handleStartSound = () => {
-    if (oiiaRef.current) {
-      oiiaRef.current.volume = 0.25;
-      oiiaRef.current.play();
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.volume = 0.25;
+      audioRef.current.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+      });
     }
   };
 
   const handleAnimationEnd = () => {
     setTimeout(() => {
       if (videoRef.current && audioRef.current) {
-        audioRef.current.volume = 0.25;
+        // Pause the cat audio and stop it
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
 
-        Promise.all([audioRef.current.play(), videoRef.current.play()]).catch((error) => {
-          console.error("Playback failed:", error);
+        // Play video (muted, no audio)
+        videoRef.current.play().catch((error) => {
+          console.error("Video playback failed:", error);
         });
 
         timeoutRef.current = setTimeout(() => {
           setRunCatVideo(false);
-          if (oiiaRef.current) oiiaRef.current.currentTime = 0;
 
           // Exit fullscreen when video ends
           if (document.fullscreenElement) {
@@ -105,7 +112,7 @@ function SpinningCat() {
           </div>
 
           <video
-            src="/catvideo.mp4"
+            src="/music/catvideo.mp4"
             ref={videoRef}
             muted
             playsInline
@@ -115,15 +122,14 @@ function SpinningCat() {
           />
 
           <img
-            src="/cat.gif"
+            src="/music/cat.gif"
             alt=""
             className="catgif"
             onAnimationStart={handleStartSound}
             onAnimationEnd={handleAnimationEnd}
           />
 
-          <audio ref={audioRef} src="/music/sunflower.mp3" />
-          <audio ref={oiiaRef} src="/music/sunflower.mp3" />
+          <audio ref={audioRef} src="/music/cataudio.mp3" />
         </motion.div>
       )}
     </AnimatePresence>
