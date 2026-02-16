@@ -72,13 +72,6 @@ function SpinningCat() {
         timeoutRef.current = setTimeout(() => {
           setRunCatVideo(false);
           if (oiiaRef.current) oiiaRef.current.currentTime = 0;
-
-          // Exit fullscreen when video ends
-          if (document.fullscreenElement) {
-            document.exitFullscreen().catch((err) => {
-              console.error(`Error attempting to exit fullscreen: ${err.message}`);
-            });
-          }
         }, 64000);
       }
     }, 500);
@@ -122,8 +115,8 @@ function SpinningCat() {
             onAnimationEnd={handleAnimationEnd}
           />
 
-          <audio ref={audioRef} src="/music/sunflower.mp3" />
-          <audio ref={oiiaRef} src="/music/sunflower.mp3" />
+          <audio ref={audioRef} src="/music/cataudio.mp3" />
+          <audio ref={oiiaRef} src="/music/oiia.gif" />
         </motion.div>
       )}
     </AnimatePresence>
