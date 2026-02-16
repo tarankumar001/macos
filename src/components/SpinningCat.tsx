@@ -56,13 +56,7 @@ function SpinningCat() {
   };
 
   const handleStartSound = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.volume = 0.25;
-      audioRef.current.play().catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
-    }
+    // Just show spinning animation, audio plays later with video
   };
 
   const handleAnimationEnd = () => {
@@ -89,6 +83,7 @@ function SpinningCat() {
       });
 
       audioRef.current.currentTime = 0;
+      audioRef.current.volume = 1;
       audioRef.current.play().catch((error) => {
         console.error("Audio playback failed:", error);
       });
