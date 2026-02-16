@@ -66,35 +66,32 @@ function SpinningCat() {
   };
 
   const handleAnimationEnd = () => {
-    // Animation ends but audio continues playing - don't pause it yet
-    if (audioRef.current) {
-      // Set up listener for when audio finishes
-      const handleAudioEnd = () => {
-        if (videoRef.current) {
-          // Set up listener for when video finishes
-          const handleVideoEnd = () => {
-            setRunCatVideo(false);
+    // Play both video and audio simultaneously when animation ends
+    if (videoRef.current && audioRef.current) {
+      // Set up listener for when video finishes
+      const handleVideoEnd = () => {
+        setRunCatVideo(false);
 
-            // Exit fullscreen when video ends
-            if (document.fullscreenElement) {
-              document.exitFullscreen().catch((err) => {
-                console.error(`Error attempting to exit fullscreen: ${err.message}`);
-              });
-            }
-            videoRef.current?.removeEventListener("ended", handleVideoEnd);
-          };
-
-          videoRef.current.addEventListener("ended", handleVideoEnd);
-
-          // Play video after audio finishes
-          videoRef.current.play().catch((error) => {
-            console.error("Video playback failed:", error);
+        // Exit fullscreen when video ends
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch((err) => {
+            console.error(`Error attempting to exit fullscreen: ${err.message}`);
           });
         }
-        audioRef.current?.removeEventListener("ended", handleAudioEnd);
+        videoRef.current?.removeEventListener("ended", handleVideoEnd);
       };
 
-      audioRef.current.addEventListener("ended", handleAudioEnd);
+      videoRef.current.addEventListener("ended", handleVideoEnd);
+
+      // Play video and audio together
+      videoRef.current.play().catch((error) => {
+        console.error("Video playback failed:", error);
+      });
+
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch((error) => {
+        console.error("Audio playback failed:", error);
+      });
     }
   };
 
@@ -121,7 +118,6 @@ function SpinningCat() {
           <video
             src="/music/catvideo.mp4"
             ref={videoRef}
-            muted
             playsInline
             controls={false}
             disablePictureInPicture
