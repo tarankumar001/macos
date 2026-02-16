@@ -51,20 +51,7 @@ const apps: AppsData[] = [
     img: "img/icons/vscode.png",
     content: <VSCode />
   },
-  {
-    id: "facetime",
-    title: "FaceTime",
-    desktop: true,
-    img: "img/icons/facetime.png",
-    width: 500 * 1.7,
-    height: 500 + appBarHeight,
-    minWidth: 350 * 1.7,
-    minHeight: 350 + appBarHeight,
-    aspectRatio: 1.7,
-    x: -80,
-    y: 20,
-    content: <FaceTime />
-  },
+
   {
     id: "terminal",
     title: "Terminal",
@@ -78,6 +65,17 @@ const apps: AppsData[] = [
     desktop: false,
     img: "img/icons/github.png",
     link: "https://github.com/Renovamen/playground-macos"
+  },
+  {
+    id: "cat",
+    title: "Cat",
+    desktop: true,
+    width: 500,
+    height: 400,
+    x: 150,
+    y: 100,
+    img: "img/icons/mail.png",
+    content: <CatApp />
   }
 ];
 

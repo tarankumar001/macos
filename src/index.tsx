@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import Desktop from "~/pages/Desktop";
 import Login from "~/pages/Login";
 import Boot from "~/pages/Boot";
+import SpinningCat from "~/components/SpinningCat";
+import UseContext from "~/Context";
 
 import "@unocss/reset/tailwind.css";
 import "uno.css";
@@ -15,6 +17,7 @@ export default function App() {
   const [booting, setBooting] = useState<boolean>(false);
   const [restart, setRestart] = useState<boolean>(false);
   const [sleep, setSleep] = useState<boolean>(false);
+  const [runCatVideo, setRunCatVideo] = useState<boolean>(false);
 
   const shutMac = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -41,24 +44,35 @@ export default function App() {
   };
 
   if (booting) {
-    return <Boot restart={restart} sleep={sleep} setBooting={setBooting} />;
+    return (
+      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
+        <Boot restart={restart} sleep={sleep} setBooting={setBooting} />
+        <SpinningCat />
+      </UseContext.Provider>
+    );
   } else if (login) {
     return (
-      <Desktop
-        setLogin={setLogin}
-        shutMac={shutMac}
-        sleepMac={sleepMac}
-        restartMac={restartMac}
-      />
+      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
+        <Desktop
+          setLogin={setLogin}
+          shutMac={shutMac}
+          sleepMac={sleepMac}
+          restartMac={restartMac}
+        />
+        <SpinningCat />
+      </UseContext.Provider>
     );
   } else {
     return (
-      <Login
-        setLogin={setLogin}
-        shutMac={shutMac}
-        sleepMac={sleepMac}
-        restartMac={restartMac}
-      />
+      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
+        <Login
+          setLogin={setLogin}
+          shutMac={shutMac}
+          sleepMac={sleepMac}
+          restartMac={restartMac}
+        />
+        <SpinningCat />
+      </UseContext.Provider>
     );
   }
 }
