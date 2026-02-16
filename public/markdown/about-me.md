@@ -1,8 +1,9 @@
 # About Me
+Hey there!,I'm a dragon lost in human world...
 
 ## Biography
 
-Hey there! I’m a tech enthusiast passionate about cybersecurity, web development, and Linux systems. I enjoy exploring how technology works under the hood — from building modern web applications to understanding system security and open-source environments.
+I’m a tech enthusiast passionate about cybersecurity, web development, and Linux systems. I enjoy exploring how technology works under the hood — from building modern web applications to understanding system security and open-source environments.
 
 My interests focus on strengthening cybersecurity skills, developing responsive web projects, and working with Linux for development, customization, and system learning. I like hands-on learning, experimenting with new tools, and continuously improving my technical abilities.
 
