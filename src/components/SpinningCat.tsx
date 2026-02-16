@@ -71,12 +71,8 @@ function SpinningCat() {
       // Set up listener for when audio finishes
       const handleAudioEnd = () => {
         if (videoRef.current) {
-          // Play video after audio finishes
-          videoRef.current.play().catch((error) => {
-            console.error("Video playback failed:", error);
-          });
-
-          timeoutRef.current = setTimeout(() => {
+          // Set up listener for when video finishes
+          const handleVideoEnd = () => {
             setRunCatVideo(false);
 
             // Exit fullscreen when video ends
@@ -85,7 +81,15 @@ function SpinningCat() {
                 console.error(`Error attempting to exit fullscreen: ${err.message}`);
               });
             }
-          }, 64000);
+            videoRef.current?.removeEventListener("ended", handleVideoEnd);
+          };
+
+          videoRef.current.addEventListener("ended", handleVideoEnd);
+
+          // Play video after audio finishes
+          videoRef.current.play().catch((error) => {
+            console.error("Video playback failed:", error);
+          });
         }
         audioRef.current?.removeEventListener("ended", handleAudioEnd);
       };
