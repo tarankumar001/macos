@@ -37,7 +37,7 @@ const bear: BearData[] = [
       {
         id: "Echohire",
         title: "Echohire",
-        file: "https://github.com/tarankumar001/ai-mock-interview/blob/master/README.md",
+        file: "https://raw.githubusercontent.com/tarankumar001/ai-mock-interview/master/README.md",
         icon: "i-heroicons-solid:fire",
         excerpt: "AI Mock Interview Website. to practice..",
         link: "https://ai-mock-interview-eight-tau.vercel.app/"
@@ -53,7 +53,7 @@ const bear: BearData[] = [
       {
         id: "Todo",
         title: "ToDo!",
-        file: "https://github.com/tarankumar001/Todo/blob/main/README.md",
+        file: "https://raw.githubusercontent.com/tarankumar001/Todo/main/README.md",
         icon: "i-ri:newspaper-fill",
         excerpt: "Todo...",
         link: "https://todo-lx3c.onrender.com/"
@@ -118,7 +118,7 @@ const bear: BearData[] = [
       {
         id: "QuickNotes",
         title: "QuickNotes",
-        file: "https://github.com/tarankumar001/QuickNotes/blob/main/README.md",
+        file: "https://raw.githubusercontent.com/tarankumar001/QuickNotes/main/README.md",
         icon: "i-bi:grid-1x2",
         excerpt: "Help you to save notes faster...",
         link: "https://addons.mozilla.org/en-US/firefox/addon/quick_notes/"

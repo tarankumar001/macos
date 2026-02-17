@@ -1,158 +1,36 @@
-# 🍎 MacOS Playground
+## 🚀 macOS Portfolio – Web Desktop
 
-> A fully interactive macOS-inspired desktop experience built with
-> React + Vite --- running entirely in your browser.
+A personal portfolio site that mimics the macOS desktop experience. It uses React + Vite and UnoCSS/Tailwind-style utilities, with multiple “apps” (Finder, Bear notes, Launchpad, browser, etc.) running inside draggable windows.
 
-MacOS Playground recreates the feeling of using macOS inside a web
-application. This is not just a UI clone --- it's a dynamic, animated
-desktop system with window management, real app behavior, and smooth
-system transitions.
+### 🧰 Tech Stack
+- **Frontend**: React 18, Vite, TypeScript
+- **Styling**: UnoCSS utility classes, custom CSS
+- **State**: Zustand
+- **Markdown**: `react-markdown`, Milkdown editor, KaTeX for math
 
-------------------------------------------------------------------------
+### 📁 Main Features
+- **macOS-style desktop UI** with dock, launchpad, top menu bar, and draggable/resizable app windows  
+- **Bear app** that displays markdown content, including remote READMEs from GitHub (e.g. Todo app README at [`https://raw.githubusercontent.com/tarankumar001/Todo/main/README.md`](https://raw.githubusercontent.com/tarankumar001/Todo/main/README.md))  
+- **Project shortcuts** to apps like Echohire, Todo, QuickNotes, résumé, and more  
+- **Dark / light aware styling** and smooth animations using Framer Motion
 
-## ✨ Experience
+### 🏃‍♂️ Getting Started
+```bash
+pnpm install
+pnpm dev
+```
 
--   Boot the system\
--   Login into your account\
--   Open apps from Dock or Launchpad\
--   Drag, focus, and manage windows\
--   Use Spotlight to search instantly
+Then open the printed local URL in your browser (e.g. `http://localhost:5173`).
 
-It behaves like a lightweight operating system --- inside the browser.
+### 🔧 Build & Preview
+```bash
+pnpm build
+pnpm serve
+```
 
-------------------------------------------------------------------------
+This builds the production bundle and serves it locally.
 
-# 🚀 Core Features
+### 📝 Notes
+- Remote project READMEs must use **raw** GitHub URLs (`raw.githubusercontent.com/...`) so the Bear markdown viewer can render them correctly.  
+- You can customize which projects show up in the Bear app by editing `src/configs/bear.tsx`.
 
-## 🖥️ Desktop Environment
-
--   macOS-style layout
--   System top menu bar
--   Real-time clock
--   Dynamic background
--   Context-aware UI states
-
-## 🚀 Boot Animation
-
--   Animated startup sequence
--   Smooth fade & scale transitions
--   System initialization feel
--   Powered by Framer Motion
-
-## 🔐 Login Screen
-
--   macOS-inspired authentication interface
--   Animated transition to desktop
--   Stateful login handling
-
-## 🔍 Spotlight Search
-
--   Command palette experience
--   Keyboard-driven interactions
--   Instant app search & launch
-
-## 📂 Launchpad
-
--   Grid-based animated app launcher
--   Smooth zoom transitions
--   Interactive hover effects
-
-## ⚓ Dock
-
--   Icon magnification animation
--   App open indicators
--   Click-to-launch behavior
--   Persistent app state
-
-## 🪟 Window Management System
-
--   Draggable windows
--   Focus detection
--   Z-index stacking
--   Smooth open/close animations
--   Application lifecycle handling
-
-## ✍️ Markdown Editor
-
--   Built with Milkdown
--   KaTeX math equation support
--   Clean writing environment
--   Modern markdown rendering
-
-## 🎞️ Animations & Micro-Interactions
-
--   Spring-based motion effects
--   Layout transitions
--   Blur + scale interactions
--   Hardware-accelerated transforms
--   60fps smooth performance
-
-------------------------------------------------------------------------
-
-# 🧠 Tech Stack
-
--   React 18\
--   Vite\
--   TypeScript\
--   Framer Motion\
--   Milkdown\
--   KaTeX\
--   UnoCSS\
--   Date-fns
-
-------------------------------------------------------------------------
-
-# 📁 Project Structure
-
-src/ ├── pages/ \# Boot, Login, Desktop ├── components/ │ ├── apps/ \#
-Application modules │ ├── dock/ \# Dock system │ ├── menus/ \# System
-menus │ ├── window/ \# Window manager │ └── ... ├── configs/ \# Config
-files ├── hooks/ \# Custom React hooks ├── stores/ \# State management
-├── styles/ \# Global styles ├── types/ \# Type definitions ├── utils/
-\# Utility functions └── Context.tsx \# Global context setup
-
-------------------------------------------------------------------------
-
-# 🛠 Installation
-
-## Prerequisites
-
--   Node.js 16+
--   pnpm (recommended)
-
-## Setup
-
-pnpm install pnpm dev
-
-Development server runs at: http://localhost:5173
-
-## Production Build
-
-pnpm build pnpm serve
-
-------------------------------------------------------------------------
-
-# 🧹 Code Quality
-
--   ESLint
--   Prettier
--   Husky
--   Lint-staged
--   Auto-import setup
-
-------------------------------------------------------------------------
-
-# 🌐 Browser Support
-
-Supports all modern browsers with ES2020+ support.
-
-------------------------------------------------------------------------
-
-# 📄 License
-
-See LICENSE file for details.
-
-------------------------------------------------------------------------
-
-> Built as a showcase playground for modern frontend architecture and
-> interactive system design.

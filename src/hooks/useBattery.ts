@@ -34,10 +34,29 @@ const defaultState: BatteryState = {
 };
 
 const useBatteryMock = (): UseBatteryState => {
-  return {
+  // Fallback for browsers that don't support the Battery Status API.
+  // Simulate a battery that slowly drains from 100% down to 0% over time.
+  const [state, setState] = useState<UseBatteryState>({
     isSupported: false,
+    fetched: true,
     ...defaultState
-  };
+  });
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setState((prev) => {
+        const nextLevel = Math.max(0, prev.level - 0.01); // drain ~1% per tick
+        return {
+          ...prev,
+          level: nextLevel
+        };
+      });
+    }, 30000); // every 30 seconds
+
+    return () => clearInterval(id);
+  }, []);
+
+  return state;
 };
 
 const useBatteryReal = (): UseBatteryState => {

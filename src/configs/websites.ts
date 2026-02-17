@@ -5,32 +5,32 @@ const websites: WebsitesData = {
     title: "SNS Links",
     sites: [
       {
-        id: "my-blog",
+        id: "website",
         title: "Website",
         img: "https://zxh.me/img/avatar.jpg",
         link: "https://medium.com/@ptarankumar",
         inner: true
       },
       {
-        id: "my-github",
+        id: "github",
         title: "Github",
         img: "img/sites/github.svg",
         link: "https://github.com/tarankumar001"
       },
       {
-        id: "my-linkedin",
+        id: "linkedin",
         title: "Linkedin",
         img: "img/sites/linkedin.svg",
         link: "https://www.linkedin.com/in/tarankumar-p-954948257/"
       },
       {
-        id: "my-twitter",
+        id: "x",
         title: "X",
         img: "img/sites/x.jpg",
         link: "https://x.com/PTarankumar"
       },
       {
-        id: "my-email",
+        id: "email",
         title: "Email",
         img: "img/sites/gmail.svg",
         link: "mailto:ptarankumar@gmail.com"
@@ -47,7 +47,7 @@ const websites: WebsitesData = {
         link: "https://github.com/"
       },
       {
-        id: "arxiv",
+        id: "jmail",
         title: "Jmail",
         img: "img/sites/arxiv.png",
         link: "https://jmail.world/"
@@ -77,15 +77,15 @@ const websites: WebsitesData = {
         link: "https://www.artstation.com//"
       },
       {
-        id: "bilibili",
+        id: "crunchyroll",
         title: "Crunchyroll",
         img: "img/sites/Crunchyroll.svg",
         link: "https://www.crunchyroll.com/"
       },
       {
-        id: "zhihu",
+        id: "echohire",
         title: "EchoHire",
-        img: "img/sites/zhihu.jpeg",
+        img: "img/ui/avatar.jpg",
         link: "https://ai-mock-interview-eight-tau.vercel.app/"
       },
       {
