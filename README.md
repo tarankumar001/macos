@@ -1,123 +1,158 @@
-# MacOS Playground
+# 🍎 MacOS Playground
 
-A React + Vite web application that recreates the macOS desktop experience in the browser. This project features a beautiful, interactive interface with desktop components, applications, and system UI elements.
+> A fully interactive macOS-inspired desktop experience built with
+> React + Vite --- running entirely in your browser.
 
-## Features
+MacOS Playground recreates the feeling of using macOS inside a web
+application. This is not just a UI clone --- it's a dynamic, animated
+desktop system with window management, real app behavior, and smooth
+system transitions.
 
-- **Desktop Interface** - Full macOS-like desktop experience
-- **Spotlight Search** - Quick search/command palette
-- **Launchpad** - App grid launcher
-- **Dock** - Application dock with icons
-- **Window Management** - Draggable windows and app system
-- **Markdown Editor** - Built-in markdown editor with Milkdown
-- **Boot Screen** - Animated boot/startup sequence
-- **Login Page** - Custom authentication interface
-- **Animations** - Smooth animations with Framer Motion
+------------------------------------------------------------------------
 
-## Tech Stack
+## ✨ Experience
 
-- **React** 18.3.1 - UI library
-- **Vite** - Build tool and dev server
-- **TypeScript** - Type-safe development
-- **Milkdown** - Markdown editor (v7.3.6)
-- **Framer Motion** 11.1.7 - Animation library
-- **UnoCSS** - Atomic CSS framework
-- **KaTeX** 0.16.10 - Math equation rendering
-- **Date-fns** 3.6.0 - Date utilities
+-   Boot the system\
+-   Login into your account\
+-   Open apps from Dock or Launchpad\
+-   Drag, focus, and manage windows\
+-   Use Spotlight to search instantly
 
-## Project Structure
+It behaves like a lightweight operating system --- inside the browser.
 
-```
-src/
-├── pages/              # Main pages (Boot, Desktop, Login)
-├── components/         # UI components
-│   ├── apps/          # Application components
-│   ├── dock/          # Dock navigation
-│   ├── menus/         # System menus
-│   └── ...            # Other components
-├── configs/           # Configuration files
-├── hooks/             # Custom React hooks
-├── stores/            # State management
-├── styles/            # Global styles
-├── types/             # TypeScript types
-├── utils/             # Utility functions
-└── Context.tsx        # React Context setup
-```
+------------------------------------------------------------------------
 
-## Getting Started
+# 🚀 Core Features
 
-### Prerequisites
+## 🖥️ Desktop Environment
 
-- Node.js 16+ or pnpm
+-   macOS-style layout
+-   System top menu bar
+-   Real-time clock
+-   Dynamic background
+-   Context-aware UI states
 
-### Installation
+## 🚀 Boot Animation
 
-```bash
-# Install dependencies
-pnpm install
+-   Animated startup sequence
+-   Smooth fade & scale transitions
+-   System initialization feel
+-   Powered by Framer Motion
 
-# Start development server
-pnpm dev
+## 🔐 Login Screen
 
-# Build for production
-pnpm build
+-   macOS-inspired authentication interface
+-   Animated transition to desktop
+-   Stateful login handling
 
-# Preview production build
-pnpm serve
+## 🔍 Spotlight Search
 
-# Run linting
-pnpm lint
-```
+-   Command palette experience
+-   Keyboard-driven interactions
+-   Instant app search & launch
 
-The development server runs on `http://localhost:5173` by default.
+## 📂 Launchpad
 
-## Development
+-   Grid-based animated app launcher
+-   Smooth zoom transitions
+-   Interactive hover effects
 
-### Available Scripts
+## ⚓ Dock
 
-- `pnpm dev` - Start dev server with hot module replacement
-- `pnpm build` - Build for production
-- `pnpm serve` - Preview production build locally
-- `pnpm lint` - Run ESLint with auto-fix
-- `pnpm prepare` - Setup Husky for git hooks
+-   Icon magnification animation
+-   App open indicators
+-   Click-to-launch behavior
+-   Persistent app state
 
-### Code Quality
+## 🪟 Window Management System
 
-- **ESLint** - Linting configuration in `eslint.config.js`
-- **Prettier** - Code formatting with Renovamen's config
-- **Husky** - Git hooks for lint-staged
-- **Lint-staged** - Run linters on staged files
+-   Draggable windows
+-   Focus detection
+-   Z-index stacking
+-   Smooth open/close animations
+-   Application lifecycle handling
 
-### Auto-imports
+## ✍️ Markdown Editor
 
-The project uses `unplugin-auto-import` for automatic imports:
-- React hooks and components auto-imported
-- Custom hooks from `src/hooks` auto-imported
-- Stores and components auto-imported
+-   Built with Milkdown
+-   KaTeX math equation support
+-   Clean writing environment
+-   Modern markdown rendering
 
-## Configuration Files
+## 🎞️ Animations & Micro-Interactions
 
-- `vite.config.ts` - Vite configuration with plugins
-- `tsconfig.json` - TypeScript configuration
-- `unocss.config.ts` - UnoCSS atomic CSS configuration
-- `eslint.config.js` - ESLint rules
-- `pnpm-lock.yaml` - Dependency lock file
+-   Spring-based motion effects
+-   Layout transitions
+-   Blur + scale interactions
+-   Hardware-accelerated transforms
+-   60fps smooth performance
 
-## Assets
+------------------------------------------------------------------------
 
-- `public/img/` - Images and icons
-- `public/logo/` - Logo files
-- `public/markdown/` - Markdown documentation
-- `public/manifest.json` - PWA manifest
+# 🧠 Tech Stack
 
-## Browser Support
+-   React 18\
+-   Vite\
+-   TypeScript\
+-   Framer Motion\
+-   Milkdown\
+-   KaTeX\
+-   UnoCSS\
+-   Date-fns
 
-Works on all modern browsers that support ES2020+.
+------------------------------------------------------------------------
 
-## License
+# 📁 Project Structure
 
-Check LICENSE file for details.
+src/ ├── pages/ \# Boot, Login, Desktop ├── components/ │ ├── apps/ \#
+Application modules │ ├── dock/ \# Dock system │ ├── menus/ \# System
+menus │ ├── window/ \# Window manager │ └── ... ├── configs/ \# Config
+files ├── hooks/ \# Custom React hooks ├── stores/ \# State management
+├── styles/ \# Global styles ├── types/ \# Type definitions ├── utils/
+\# Utility functions └── Context.tsx \# Global context setup
 
----
+------------------------------------------------------------------------
 
-**Note:** This is a playground/showcase project demonstrating advanced React patterns and interactive UI design.
+# 🛠 Installation
+
+## Prerequisites
+
+-   Node.js 16+
+-   pnpm (recommended)
+
+## Setup
+
+pnpm install pnpm dev
+
+Development server runs at: http://localhost:5173
+
+## Production Build
+
+pnpm build pnpm serve
+
+------------------------------------------------------------------------
+
+# 🧹 Code Quality
+
+-   ESLint
+-   Prettier
+-   Husky
+-   Lint-staged
+-   Auto-import setup
+
+------------------------------------------------------------------------
+
+# 🌐 Browser Support
+
+Supports all modern browsers with ES2020+ support.
+
+------------------------------------------------------------------------
+
+# 📄 License
+
+See LICENSE file for details.
+
+------------------------------------------------------------------------
+
+> Built as a showcase playground for modern frontend architecture and
+> interactive system design.

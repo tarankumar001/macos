@@ -6,7 +6,9 @@ function CatApp() {
 
   return (
     <div className="w-full h-full p-4 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center gap-4">
-      <div className="text-2xl font-bold text-center">🐱 Cat Video</div>
+      <div className="text-2xl font-bold text-center text-black dark:text-white">
+        🐱 Cat Video
+      </div>
       <img src="/music/cat.gif" alt="cat" className="w-32 h-32 rounded-lg" />
       <button
         onClick={() => setRunCatVideo(true)}

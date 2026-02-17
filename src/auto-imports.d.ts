@@ -29,6 +29,7 @@ declare global {
   const forwardRef: typeof import('react')['forwardRef']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
+  const music: typeof import('./components/music')['default']
   const startTransition: typeof import('react')['startTransition']
   const useAudio: typeof import('./hooks/useAudio')['useAudio']
   const useBattery: typeof import('./hooks/useBattery')['useBattery']

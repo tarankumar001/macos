@@ -43,38 +43,35 @@ export default function App() {
     setBooting(true);
   };
 
+  let mainContent;
   if (booting) {
-    return (
-      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
-        <Boot restart={restart} sleep={sleep} setBooting={setBooting} />
-        <SpinningCat />
-      </UseContext.Provider>
-    );
+    mainContent = <Boot restart={restart} sleep={sleep} setBooting={setBooting} />;
   } else if (login) {
-    return (
-      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
-        <Desktop
-          setLogin={setLogin}
-          shutMac={shutMac}
-          sleepMac={sleepMac}
-          restartMac={restartMac}
-        />
-        <SpinningCat />
-      </UseContext.Provider>
+    mainContent = (
+      <Desktop
+        setLogin={setLogin}
+        shutMac={shutMac}
+        sleepMac={sleepMac}
+        restartMac={restartMac}
+      />
     );
   } else {
-    return (
-      <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
-        <Login
-          setLogin={setLogin}
-          shutMac={shutMac}
-          sleepMac={sleepMac}
-          restartMac={restartMac}
-        />
-        <SpinningCat />
-      </UseContext.Provider>
+    mainContent = (
+      <Login
+        setLogin={setLogin}
+        shutMac={shutMac}
+        sleepMac={sleepMac}
+        restartMac={restartMac}
+      />
     );
   }
+
+  return (
+    <UseContext.Provider value={{ runCatVideo, setRunCatVideo }}>
+      {mainContent}
+      <SpinningCat />
+    </UseContext.Provider>
+  );
 }
 
 const rootElement = document.getElementById("root") as HTMLElement;
