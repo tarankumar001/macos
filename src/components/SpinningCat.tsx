@@ -4,42 +4,63 @@ import UseContext from "~/Context";
 import "~/styles/spinning-cat.css";
 
 function SpinningCat() {
-  const [escBtn, setEscBtn] = useState<boolean>(false);
+  const [escBtn, setEscBtn] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { runCatVideo, setRunCatVideo } = useContext(UseContext);
 
+  // Show ESC hint briefly
   useEffect(() => {
     if (escBtn) {
-      const timer = setTimeout(() => {
-        setEscBtn(false);
-      }, 3000);
+      const timer = setTimeout(() => setEscBtn(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [escBtn]);
 
-  // Play video and request fullscreen
+  // 🔥 FULLSCREEN + PLAY VIDEO TOGETHER
   useEffect(() => {
-    if (runCatVideo && containerRef.current) {
-      if (containerRef.current.requestFullscreen) {
-        containerRef.current.requestFullscreen().catch(() => {});
-      }
-      if (videoRef.current) {
+    const startVideo = async () => {
+      if (!runCatVideo || !containerRef.current || !videoRef.current) return;
+
+      try {
+        await containerRef.current.requestFullscreen();
         videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(() => {});
+        await videoRef.current.play();
+      } catch (err) {
+        console.log("Playback issue:", err);
       }
-    } else if (!runCatVideo && videoRef.current) {
+    };
+
+    if (runCatVideo) {
+      startVideo();
+    } else if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
   }, [runCatVideo]);
+
+  // ESC button + keyboard ESC
+  useEffect(() => {
+    const escListener = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleEscape();
+    };
+
+    window.addEventListener("keydown", escListener);
+    return () => window.removeEventListener("keydown", escListener);
+  }, []);
+
+  const handleContainerClick = () => {
+    setEscBtn(true);
+  };
 
   const handleEscape = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+
     setRunCatVideo(false);
+
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
     }
@@ -51,19 +72,13 @@ function SpinningCat() {
         <motion.div
           ref={containerRef}
           className="cat_container"
-          onClick={() => {
-            setEscBtn(true);
-            if (videoRef.current) {
-              // Ensure play is directly tied to a user gesture to avoid autoplay blocking
-              videoRef.current.play().catch(() => {});
-            }
-          }}
+          onClick={handleContainerClick}
           exit={{ opacity: 0 }}
           transition={{ ease: "easeInOut", duration: 0.5 }}
         >
           <div
             className={`exit_btn ${escBtn ? "" : "hide"}`}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+            onClick={(e) => {
               e.stopPropagation();
               handleEscape();
             }}
@@ -72,14 +87,14 @@ function SpinningCat() {
           </div>
 
           <video
-            src="/music/catvideo.mp4"
             ref={videoRef}
+            src="/music/catvideo.mp4"
             playsInline
             preload="auto"
             controls={false}
             disablePictureInPicture
             controlsList="nodownload noplaybackrate"
-            onEnded={() => setRunCatVideo(false)}
+            onEnded={handleEscape}
           />
         </motion.div>
       )}
