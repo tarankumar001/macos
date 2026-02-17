@@ -51,7 +51,13 @@ function SpinningCat() {
         <motion.div
           ref={containerRef}
           className="cat_container"
-          onClick={() => setEscBtn(true)}
+          onClick={() => {
+            setEscBtn(true);
+            if (videoRef.current) {
+              // Ensure play is directly tied to a user gesture to avoid autoplay blocking
+              videoRef.current.play().catch(() => {});
+            }
+          }}
           exit={{ opacity: 0 }}
           transition={{ ease: "easeInOut", duration: 0.5 }}
         >
@@ -69,10 +75,10 @@ function SpinningCat() {
             src="/music/catvideo.mp4"
             ref={videoRef}
             playsInline
+            preload="auto"
             controls={false}
             disablePictureInPicture
             controlsList="nodownload noplaybackrate"
-            autoPlay
             onEnded={() => setRunCatVideo(false)}
           />
         </motion.div>

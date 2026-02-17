@@ -48,7 +48,7 @@ const bear: BearData[] = [
         file: "https://raw.githubusercontent.com/tarankumar001/macos/main/README.md",
         icon: "i-ri:gamepad-line",
         excerpt: "My portfolio website simulating macOS's GUI...",
-        link: "https://github.com/Renovamen/playground-macos"
+        link: "https://macos-ashy.vercel.app/"
       },
       {
         id: "Todo",
