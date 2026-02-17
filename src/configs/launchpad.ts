@@ -7,12 +7,12 @@ const launchpadApps: LaunchpadData[] = [
     img: "img/icons/launchpad/flint.png",
     link: "https://ai-mock-interview-eight-tau.vercel.app/"
   },
-  {
-    id: "oh-my-cv",
-    title: "Oh, My CV!",
-    img: "https://ohmycv.app/pwa-512x512.png",
-    link: "https://ohmycv.app"
-  },
+  // {
+  //   id: "oh-my-cv",
+  //   title: "Oh, My CV!",
+  //   img: "https://ohmycv.app/pwa-512x512.png",
+  //   link: "https://ohmycv.app"
+  // },
   {
     id: "oh-vue-icons",
     title: "Quick Notes!",
