@@ -14,9 +14,9 @@ I’m always curious about emerging technologies and aim to grow as a developer 
 
 Contact me by:
 
-- Email: [renovamenzxh@gmail.com](mailto:ptarankumar@gmail.com)
-- Github: [@Renovamen](https://github.com/Renovamen)
-- Linkedin: [xiaohan-zou](https://www.linkedin.com/in/tarankumar-p-954948257/)
+- Email: [ptarankumar@gmail.com](mailto:ptarankumar@gmail.com)
+- Github: [@tarankumar001](https://github.com/tarankumar001)
+- Linkedin: [P.Tarankumar](https://www.linkedin.com/in/tarankumar-p-954948257/)
 
 ## Résumé
 

@@ -54,6 +54,7 @@ interface TopBarProps extends MacActions {
   setSpotlightBtnRef: (value: React.RefObject<HTMLDivElement>) => void;
   hide: boolean;
   toggleSpotlight: () => void;
+  closeAllApps: () => void;
 }
 
 interface TopBarState {
@@ -194,6 +195,7 @@ const TopBar = (props: TopBarProps) => {
           sleep={sleep}
           toggleAppleMenu={toggleAppleMenu}
           btnRef={appleBtnRef}
+          closeAllApps={props.closeAllApps}
         />
       )}
 

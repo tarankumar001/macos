@@ -8,44 +8,32 @@ const websites: WebsitesData = {
         id: "my-blog",
         title: "Website",
         img: "https://zxh.me/img/avatar.jpg",
-        link: "https://zxh.me/",
+        link: "https://medium.com/@ptarankumar",
         inner: true
       },
       {
         id: "my-github",
         title: "Github",
         img: "img/sites/github.svg",
-        link: "https://github.com/Renovamen"
+        link: "https://github.com/tarankumar001"
       },
       {
         id: "my-linkedin",
         title: "Linkedin",
         img: "img/sites/linkedin.svg",
-        link: "https://www.linkedin.com/in/xiaohan-zou"
-      },
-      {
-        id: "my-google-scholar",
-        title: "Scholar",
-        img: "img/sites/google-scholar.svg",
-        link: "https://scholar.google.com/citations?user=RuW6xgMAAAAJ"
-      },
-      {
-        id: "my-zhihu",
-        title: "知乎",
-        img: "img/sites/zhihu.jpeg",
-        link: "https://www.zhihu.com/people/chao-neng-gui-su"
+        link: "https://www.linkedin.com/in/tarankumar-p-954948257/"
       },
       {
         id: "my-twitter",
-        title: "Twitter",
-        img: "img/sites/twitter.svg",
-        link: "https://www.twitter.com/renovamen_zxh"
+        title: "X",
+        img: "img/sites/x.jpg",
+        link: "https://x.com/PTarankumar"
       },
       {
         id: "my-email",
         title: "Email",
         img: "img/sites/gmail.svg",
-        link: "mailto:renovamenzxh@gmail.com"
+        link: "mailto:ptarankumar@gmail.com"
       }
     ]
   },
@@ -60,15 +48,15 @@ const websites: WebsitesData = {
       },
       {
         id: "arxiv",
-        title: "arXiv",
+        title: "Jmail",
         img: "img/sites/arxiv.png",
-        link: "https://arxiv.org/"
+        link: "https://jmail.world/"
       },
       {
         id: "twitter",
-        title: "Twitter",
-        img: "img/sites/twitter.svg",
-        link: "https://www.twitter.com/"
+        title: "X",
+        img: "img/sites/x.jpg",
+        link: "https://x.com/"
       },
       {
         id: "dribbble",
@@ -90,9 +78,9 @@ const websites: WebsitesData = {
       },
       {
         id: "bilibili",
-        title: "Bilibili",
-        img: "img/sites/bilibili.svg",
-        link: "https://www.bilibili.com/"
+        title: "Crunchyroll",
+        img: "img/sites/Crunchyroll.svg",
+        link: "https://www.crunchyroll.com/"
       },
       {
         id: "zhihu",
@@ -147,18 +135,6 @@ const websites: WebsitesData = {
         id: "nazo",
         title: "Nazo",
         link: "https://nazo.one-story.cn"
-      },
-      {
-        id: "svgomg",
-        title: "SVGOMG",
-        img: "https://jakearchibald.github.io/svgomg/imgs/icon.png",
-        link: "https://jakearchibald.github.io/svgomg/"
-      },
-      {
-        id: "tiny-png",
-        title: "Tiny PNG",
-        img: "https://tinypng.com/images/panda-chewing-2x.png",
-        link: "https://tinypng.com/"
       }
     ]
   }

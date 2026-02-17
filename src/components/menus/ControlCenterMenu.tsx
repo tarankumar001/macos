@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-rangeslider";
+import { motion } from "framer-motion";
 import "react-rangeslider/lib/index.css";
 import { music } from "~/configs";
 
@@ -66,42 +67,58 @@ export default function ControlCenterMenu({
   useClickOutside(controlCenterRef, toggleControlCenter, [btnRef]);
 
   return (
-    <div
+    <motion.div
       className="w-80 h-96 max-w-full shadow-menu p-2.5 text-c-black bg-c-100/70"
       pos="fixed top-9.5 right-0 sm:right-1.5"
       border="~ menu rounded-2xl"
       grid="~ cols-4 rows-5 gap-2"
       ref={controlCenterRef}
+      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
       <div className="cc-grid row-span-2 col-span-2 p-2 flex flex-col justify-around">
         <div className="hstack space-x-2">
-          <div className={`${wifi ? "cc-btn" : "cc-btn-active"}`} onClick={toggleWIFI}>
+          <motion.div
+            className={`${wifi ? "cc-btn" : "cc-btn-active"}`}
+            onClick={toggleWIFI}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
             <span className="i-material-symbols:wifi text-base" />
-          </div>
+          </motion.div>
           <div p="t-0.5">
             <div className="font-medium leading-4">Wi-Fi</div>
             <div className="cc-text">{wifi ? "Home" : "Off"}</div>
           </div>
         </div>
         <div className="hstack space-x-2">
-          <div
+          <motion.div
             className={`${bluetooth ? "cc-btn" : "cc-btn-active"}`}
             onClick={toggleBluetooth}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <span className="i-charm:bluetooth text-base" />
-          </div>
+          </motion.div>
           <div p="t-0.5">
             <div className="font-medium leading-4">Bluetooth</div>
             <div className="cc-text">{bluetooth ? "On" : "Off"}</div>
           </div>
         </div>
         <div className="hstack space-x-2">
-          <div
+          <motion.div
             className={`${airdrop ? "cc-btn" : "cc-btn-active"}`}
             onClick={toggleAirdrop}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <span className="i-material-symbols:rss-feed-rounded text-base" />
-          </div>
+          </motion.div>
           <div p="t-0.5">
             <div className="font-medium leading-4">AirDrop</div>
             <div className="cc-text">{airdrop ? "Contacts Only" : "Off"}</div>
@@ -109,13 +126,19 @@ export default function ControlCenterMenu({
         </div>
       </div>
       <div className="cc-grid col-span-2 p-2 hstack space-x-3">
-        <div className={`${dark ? "cc-btn" : "cc-btn-active"}`} onClick={toggleDark}>
+        <motion.div
+          className={`${dark ? "cc-btn" : "cc-btn-active"}`}
+          onClick={toggleDark}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           {dark ? (
             <span className="i-ion:moon text-base" />
           ) : (
             <span className="i-ion:sunny text-base" />
           )}
-        </div>
+        </motion.div>
         <div font-medium>{dark ? "Dark Mode" : "Light Mode"}</div>
       </div>
       <div className="cc-grid flex-center flex-col">
@@ -124,9 +147,12 @@ export default function ControlCenterMenu({
           Keyboard Brightness
         </span>
       </div>
-      <div
+      <motion.div
         className="cc-grid flex-center flex-col cursor-default"
         onClick={() => toggleFullScreen(!fullscreen)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         {fullscreen ? (
           <span className="i-bi:fullscreen-exit text-base" />
@@ -136,7 +162,7 @@ export default function ControlCenterMenu({
         <span text="xs center" font="leading-3.5" m="t-1.5">
           {fullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
         </span>
-      </div>
+      </motion.div>
       <div className="cc-grid col-span-4 px-2.5 py-2 space-y-1 flex flex-col justify-around">
         <span className="font-medium ml-0.5">Display</span>
         <SliderComponent icon="i-ion:sunny" value={brightness} setValue={setBrightness} />
@@ -152,11 +178,23 @@ export default function ControlCenterMenu({
           <div className="cc-text">{music.artist}</div>
         </div>
         {playing ? (
-          <span className="i-bi:pause-fill text-2xl" onClick={() => toggleAudio(false)} />
+          <motion.span
+            className="i-bi:pause-fill text-2xl cursor-pointer"
+            onClick={() => toggleAudio(false)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          />
         ) : (
-          <span className="i-bi:play-fill text-2xl" onClick={() => toggleAudio(true)} />
+          <motion.span
+            className="i-bi:play-fill text-2xl cursor-pointer"
+            onClick={() => toggleAudio(true)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

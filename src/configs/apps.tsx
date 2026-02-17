@@ -64,13 +64,13 @@ const apps: AppsData[] = [
     title: "Github",
     desktop: false,
     img: "img/icons/github.png",
-    link: "https://github.com/Renovamen/playground-macos"
+    link: "https://github.com/tarankumar001/macos"
   },
   {
     id: "cat",
     title: "Cat",
     desktop: true,
-    width: 500,
+    width: 600,
     height: 400,
     x: 150,
     y: 100,

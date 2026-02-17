@@ -219,36 +219,51 @@ export default class Terminal extends React.Component<
 
   help = () => {
     const help = (
-      <ul className="list-disc ml-6 pb-1.5">
+      <ul className="list-disc ml-6 pb-1.5 space-y-1">
         <li>
-          <span text-red-400>cat {"<file>"}</span> - See the content of {"<file>"}
+          <strong>Quick start:</strong>
         </li>
         <li>
-          <span text-red-400>cd {"<dir>"}</span> - Move into
-          {" <dir>"}, "cd .." to move to the parent directory, "cd" or "cd ~" to return to
-          root
+          <span text-red-400>ls</span> - See available folders (try this first)
         </li>
         <li>
-          <span text-red-400>ls</span> - See files and directories in the current
-          directory
+          <span text-red-400>cd about</span> - Learn about me
         </li>
         <li>
-          <span text-red-400>clear</span> - Clear the screen
+          <span text-red-400>cat bio.txt</span> - My bio
         </li>
         <li>
-          <span text-red-400>help</span> - Display this help menu
+          <span text-red-400>cat contact.txt</span> - Contact info
+        </li>
+
+        <li className="pt-2">
+          <strong>Commands:</strong>
         </li>
         <li>
-          <span text-red-400>rm -rf /</span> - :)
+          <span text-red-400>cat {"<file>"}</span> - See file content
         </li>
         <li>
-          press <span text-red-400>up arrow / down arrow</span> - Select history commands
+          <span text-red-400>cd {"<dir>"}</span> - Enter folder, cd .. to go back
         </li>
         <li>
-          press <span text-red-400>tab</span> - Auto complete
+          <span text-red-400>ls</span> - List files & folders
+        </li>
+        <li>
+          <span text-red-400>clear</span> - Clear terminal
+        </li>
+        <li>
+          <span text-red-400>help</span> - Show this help menu
+        </li>
+
+        <li className="pt-2">↑ ↓ arrows - Command history</li>
+        <li>Tab - Auto complete</li>
+
+        <li>
+          <span text-red-400>rm -rf /</span> - Don't try 😄
         </li>
       </ul>
     );
+
     this.generateResultRow(this.curInputTimes, help);
   };
 

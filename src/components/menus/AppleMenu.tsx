@@ -7,6 +7,7 @@ interface AppleMenuProps {
   sleep: (e: React.MouseEvent<HTMLLIElement>) => void;
   toggleAppleMenu: () => void;
   btnRef: React.RefObject<HTMLDivElement>;
+  closeAllApps: () => void;
 }
 
 export default function AppleMenu({
@@ -15,7 +16,8 @@ export default function AppleMenu({
   restart,
   sleep,
   toggleAppleMenu,
-  btnRef
+  btnRef,
+  closeAllApps
 }: AppleMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,7 +36,7 @@ export default function AppleMenu({
         <MenuItem>Recent Items</MenuItem>
       </MenuItemGroup>
       <MenuItemGroup>
-        <MenuItem>Force Quit...</MenuItem>
+        <MenuItem onClick={closeAllApps}>Force Quit...</MenuItem>
       </MenuItemGroup>
       <MenuItemGroup>
         <MenuItem onClick={sleep}>Sleep</MenuItem>
@@ -43,7 +45,7 @@ export default function AppleMenu({
       </MenuItemGroup>
       <MenuItemGroup border={false}>
         <MenuItem onClick={logout}>Lock Screen</MenuItem>
-        <MenuItem onClick={logout}>Log Out Xiaohan Zou...</MenuItem>
+        <MenuItem onClick={logout}>Log Out Tarankumar...</MenuItem>
       </MenuItemGroup>
     </div>
   );

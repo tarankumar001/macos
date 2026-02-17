@@ -11,10 +11,22 @@ const terminal: TerminalData[] = [
         title: "bio.txt",
         type: "file",
         content: (
-          <div className="py-1">
+          <div className="py-1 space-y-2">
+            <div>Hey there! I'm Tarankumar — a dragon lost in the human world 🐉</div>
             <div>
-              Hi, this is Xiaohan Zou. I am a PhD student at the Computer Science and
-              Engineering department of Pennsylvania State University.
+              I'm a tech enthusiast passionate about cybersecurity, web development, and
+              Linux systems. I enjoy exploring how technology works under the hood — from
+              building modern web applications to understanding system security and
+              open-source environments.
+            </div>
+            <div>
+              My interests focus on strengthening cybersecurity skills, developing
+              responsive web projects, and working with Linux for development,
+              customization, and system learning.
+            </div>
+            <div>
+              I love hands-on learning, experimenting with new tools, and constantly
+              improving my technical skills while building secure and impactful solutions.
             </div>
           </div>
         )
@@ -23,87 +35,66 @@ const terminal: TerminalData[] = [
         id: "about-interests",
         title: "interests.txt",
         type: "file",
-        content: "Machine Learning / Computer Vision / Multimodal Learning"
-      },
-      {
-        id: "about-who-cares",
-        title: "who-cares.txt",
-        type: "file",
-        content:
-          "I'm looking for a research internship for Summer 2024. I'm open to collaboration on research projects."
+        content: "Cybersecurity / Web Development / Linux / Open Source / System Security"
       },
       {
         id: "about-contact",
         title: "contact.txt",
         type: "file",
         content: (
-          <ul className="list-disc ml-6">
+          <ul className="list-disc ml-6 space-y-1">
             <li>
               Email:{" "}
               <a
                 className="text-blue-300"
-                href="mailto:renovamenzxh@gmail.com"
+                href="mailto:ptarankumar@gmail.com"
                 target="_blank"
                 rel="noreferrer"
               >
-                renovamenzxh@gmail.com
+                ptarankumar@gmail.com
               </a>
             </li>
             <li>
               Github:{" "}
               <a
                 className="text-blue-300"
-                href="https://github.com/Renovamen"
+                href="https://github.com/tarankumar001"
                 target="_blank"
                 rel="noreferrer"
               >
-                @Renovamen
-              </a>
-            </li>
-            <li>
-              <a
-                className="text-blue-300"
-                href="https://scholar.google.com/citations?user=RuW6xgMAAAAJ"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Google Scholar
+                @tarankumar001
               </a>
             </li>
             <li>
               Linkedin:{" "}
               <a
                 className="text-blue-300"
-                href="https://www.linkedin.com/in/xiaohan-zou"
+                href="https://www.linkedin.com/in/tarankumar-p-954948257/"
                 target="_blank"
                 rel="noreferrer"
               >
-                xiaohan-zou
-              </a>
-            </li>
-            <li>
-              Personal Website:{" "}
-              <a
-                className="text-blue-300"
-                href="https://zxh.me"
-                target="_blank"
-                rel="noreferrer"
-              >
-                https://zxh.me
-              </a>
-            </li>
-            <li>
-              知乎:{" "}
-              <a
-                className="text-blue-300"
-                href="https://www.zhihu.com/people/chao-neng-gui-su"
-                target="_blank"
-                rel="noreferrer"
-              >
-                @西伯利亚大恶龙
+                P.Tarankumar
               </a>
             </li>
           </ul>
+        )
+      },
+      {
+        id: "about-resume",
+        title: "resume.txt",
+        type: "file",
+        content: (
+          <div>
+            Resume (English):{" "}
+            <a
+              className="text-blue-300"
+              href="https://pdflink.to/p_tarankumar/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Resume
+            </a>
+          </div>
         )
       }
     ]
@@ -116,15 +107,13 @@ const terminal: TerminalData[] = [
       <div className="py-1">
         <div>
           <span className="text-yellow-400">while</span>(
-          <span className="text-blue-400">sleeping</span>) <span>{"{"}</span>
+          <span className="text-blue-400">sleeping</span>) {"{"}
         </div>
         <div>
           <span className="text-blue-400 ml-9">money</span>
           <span className="text-yellow-400">++</span>;
         </div>
-        <div>
-          <span>{"}"}</span>
-        </div>
+        <div>{"}"}</div>
       </div>
     )
   }

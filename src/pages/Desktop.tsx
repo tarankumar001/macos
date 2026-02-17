@@ -161,6 +161,20 @@ export default function Desktop(props: MacActions) {
     });
   };
 
+  const closeAllApps = (): void => {
+    const showApps = state.showApps;
+    Object.keys(showApps).forEach((id) => {
+      showApps[id] = false;
+      setAppMax(id, false);
+    });
+    setState({
+      ...state,
+      showApps: showApps,
+      hideDockAndTopbar: false,
+      currentTitle: "Finder"
+    });
+  };
+
   const openApp = (id: string): void => {
     // add it to the shown app list
     const showApps = state.showApps;
@@ -253,6 +267,7 @@ export default function Desktop(props: MacActions) {
         toggleSpotlight={toggleSpotlight}
         hide={state.hideDockAndTopbar}
         setSpotlightBtnRef={setSpotlightBtnRef}
+        closeAllApps={closeAllApps}
       />
 
       {/* Desktop Apps */}
