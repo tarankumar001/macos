@@ -19,5 +19,5 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["./src", "public/music/SpinningCat.tsx"]
+  "include": ["./src", "public/music/SpinningCat.tsx", "../music.ts"]
 }

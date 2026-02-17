@@ -84,9 +84,9 @@ const websites: WebsitesData = {
       },
       {
         id: "zhihu",
-        title: "知乎",
+        title: "EchoHire",
         img: "img/sites/zhihu.jpeg",
-        link: "https://www.zhihu.com/"
+        link: "https://ai-mock-interview-eight-tau.vercel.app/"
       },
       {
         id: "leetcode",
@@ -107,34 +107,10 @@ const websites: WebsitesData = {
         link: "https://news.ycombinator.com/"
       },
       {
-        id: "v2ex",
-        title: "V2EX",
-        img: "https://www.v2ex.com/apple-touch-icon.png",
-        link: "https://www.v2ex.com/"
-      },
-      {
-        id: "aideadline",
-        title: "AI Deadlines",
-        img: "https://aideadlin.es/static/img/favicon.png",
-        link: "https://aideadlin.es/",
-        inner: true
-      },
-      {
-        id: "oh-my-cv",
-        title: "OhMyCV",
-        img: "https://ohmycv.app/apple-touch-icon.png",
-        link: "https://ohmycv.app/"
-      },
-      {
         id: "steam",
         title: "Steam",
         img: "img/sites/steam.svg",
         link: "https://store.steampowered.com/"
-      },
-      {
-        id: "nazo",
-        title: "Nazo",
-        link: "https://nazo.one-story.cn"
       }
     ]
   }

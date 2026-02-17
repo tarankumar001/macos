@@ -3,9 +3,9 @@ import type { LaunchpadData } from "~/types";
 const launchpadApps: LaunchpadData[] = [
   {
     id: "flint",
-    title: "Mock Interview",
+    title: "Echohire",
     img: "img/icons/launchpad/flint.png",
-    link: "https://github.com/Renovamen/flint"
+    link: "https://ai-mock-interview-eight-tau.vercel.app/"
   },
   {
     id: "oh-my-cv",
@@ -17,7 +17,7 @@ const launchpadApps: LaunchpadData[] = [
     id: "oh-vue-icons",
     title: "Quick Notes!",
     img: "img/icons/launchpad/oh-vue-icons.png",
-    link: "https://addons.mozilla.org/en-US/developers/addon/quick_notes"
+    link: "https://addons.mozilla.org/en-US/firefox/addon/quick_notes/"
   },
   // {
   //   id: "gungnir",
