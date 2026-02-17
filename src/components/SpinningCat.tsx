@@ -11,47 +11,54 @@ function SpinningCat() {
 
   // Show ESC hint briefly
   useEffect(() => {
-    if (escBtn) {
-      const timer = setTimeout(() => setEscBtn(false), 3000);
-      return () => clearTimeout(timer);
-    }
+    if (!escBtn) return;
+    const timer = setTimeout(() => setEscBtn(false), 3000);
+    return () => clearTimeout(timer);
   }, [escBtn]);
 
-  // 🔥 FULLSCREEN + PLAY VIDEO TOGETHER
+  // 🔥 FULLSCREEN + SAFE AUTOPLAY (PRODUCTION SAFE)
   useEffect(() => {
-    const startVideo = async () => {
-      if (!runCatVideo || !containerRef.current || !videoRef.current) return;
+    if (!runCatVideo || !containerRef.current || !videoRef.current) return;
 
+    let cancelled = false;
+    const video = videoRef.current;
+
+    const startVideo = async () => {
       try {
-        await containerRef.current.requestFullscreen();
-        videoRef.current.currentTime = 0;
-        await videoRef.current.play();
+        // Enter fullscreen
+        await containerRef.current!.requestFullscreen();
+
+        // Wait until video is actually playable (VERY IMPORTANT for Vercel)
+        if (video.readyState < 3) {
+          await new Promise<void>((resolve) => {
+            video.oncanplay = () => resolve();
+          });
+        }
+
+        if (cancelled) return;
+
+        video.currentTime = 0;
+        await video.play();
       } catch (err) {
-        console.log("Playback issue:", err);
+        console.log("Video playback blocked:", err);
       }
     };
 
-    if (runCatVideo) {
-      startVideo();
-    } else if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
+    startVideo();
+
+    return () => {
+      cancelled = true;
+    };
   }, [runCatVideo]);
 
-  // ESC button + keyboard ESC
+  // Keyboard ESC support
   useEffect(() => {
-    const escListener = (e: KeyboardEvent) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleEscape();
     };
-
-    window.addEventListener("keydown", escListener);
-    return () => window.removeEventListener("keydown", escListener);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  const handleContainerClick = () => {
-    setEscBtn(true);
-  };
 
   const handleEscape = () => {
     if (videoRef.current) {
@@ -72,7 +79,7 @@ function SpinningCat() {
         <motion.div
           ref={containerRef}
           className="cat_container"
-          onClick={handleContainerClick}
+          onClick={() => setEscBtn(true)}
           exit={{ opacity: 0 }}
           transition={{ ease: "easeInOut", duration: 0.5 }}
         >
@@ -94,6 +101,7 @@ function SpinningCat() {
             controls={false}
             disablePictureInPicture
             controlsList="nodownload noplaybackrate"
+            crossOrigin="anonymous"
             onEnded={handleEscape}
           />
         </motion.div>
