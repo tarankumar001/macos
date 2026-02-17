@@ -74,7 +74,7 @@ const apps: AppsData[] = [
     height: 400,
     x: 150,
     y: 100,
-    img: "img/icons/mail.png",
+    img: "img/icons/cat.png",
     content: <CatApp />
   }
 ];

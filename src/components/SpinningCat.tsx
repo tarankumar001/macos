@@ -8,6 +8,7 @@ function SpinningCat() {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const spinningAudioRef = useRef<HTMLAudioElement | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -45,6 +46,10 @@ function SpinningCat() {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+    if (spinningAudioRef.current) {
+      spinningAudioRef.current.pause();
+      spinningAudioRef.current.currentTime = 0;
+    }
     setRunCatVideo(false);
 
     // Exit fullscreen
@@ -56,11 +61,23 @@ function SpinningCat() {
   };
 
   const handleStartSound = () => {
-    // Just show spinning animation, audio plays later with video
+    // Play spinning animation audio
+    if (spinningAudioRef.current) {
+      spinningAudioRef.current.currentTime = 0;
+      spinningAudioRef.current.volume = 1;
+      spinningAudioRef.current.play().catch((error) => {
+        console.error("Spinning audio playback failed:", error);
+      });
+    }
   };
 
   const handleAnimationEnd = () => {
-    // Play both video and audio simultaneously when animation ends
+    // Stop spinning audio and play video with cat audio
+    if (spinningAudioRef.current) {
+      spinningAudioRef.current.pause();
+      spinningAudioRef.current.currentTime = 0;
+    }
+
     if (videoRef.current && audioRef.current) {
       // Set up listener for when video finishes
       const handleVideoEnd = () => {
@@ -128,6 +145,7 @@ function SpinningCat() {
           />
 
           <audio ref={audioRef} src="/music/cataudio.mp3" />
+          <audio ref={spinningAudioRef} src="/music/oiia.mp3" />
         </motion.div>
       )}
     </AnimatePresence>
