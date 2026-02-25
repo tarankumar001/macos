@@ -95,7 +95,7 @@ function SpinningCat() {
 
           <video
             ref={videoRef}
-            src="/music/catvideo.mp4"
+            src={import.meta.env.VITE_CAT_VIDEO_URL || "/music/catvideo.mp4"}
             playsInline
             preload="auto"
             controls={false}
