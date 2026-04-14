@@ -11,6 +11,13 @@ const categories = [
     color: "bg-blue-500"
   },
   {
+    id: "airdrop",
+    title: "AirDrop",
+    icon: "i-material-symbols:rss-feed-rounded",
+    color: "bg-blue-500"
+  },
+  { id: "general", title: "General", icon: "i-bi:gear-fill", color: "bg-gray-500" },
+  {
     id: "appearance",
     title: "Appearance",
     icon: "i-bi:palette-fill",
@@ -23,27 +30,36 @@ const categories = [
     color: "bg-gray-500"
   },
   { id: "displays", title: "Displays", icon: "i-bi:display", color: "bg-blue-500" },
-  { id: "sound", title: "Sound", icon: "i-bi:volume-up-fill", color: "bg-orange-500" }
+  { id: "sound", title: "Sound", icon: "i-bi:volume-up-fill", color: "bg-orange-500" },
+  { id: "battery", title: "Battery", icon: "i-bi:battery-half", color: "bg-green-500" },
+  {
+    id: "privacy",
+    title: "Privacy & Security",
+    icon: "i-bi:shield-lock-fill",
+    color: "bg-blue-500"
+  }
 ];
 
 export default function SystemPreferences() {
   const [activeTab, setActiveTab] = useState("appearance");
+  const batteryState = useBattery();
 
-  const { dark, wifi, bluetooth, volume, brightness, dockSize, dockMag } = useStore(
-    (state: any) => ({
+  const { dark, wifi, bluetooth, airdrop, volume, brightness, dockSize, dockMag } =
+    useStore((state: any) => ({
       dark: state.dark,
       wifi: state.wifi,
       bluetooth: state.bluetooth,
+      airdrop: state.airdrop,
       volume: state.volume,
       brightness: state.brightness,
       dockSize: state.dockSize,
       dockMag: state.dockMag
-    })
-  );
+    }));
 
   const {
     toggleWIFI,
     toggleBluetooth,
+    toggleAirdrop,
     toggleDark,
     toggleFullScreen,
     setVolume,
@@ -53,6 +69,7 @@ export default function SystemPreferences() {
   } = useStore((state: any) => ({
     toggleWIFI: state.toggleWIFI,
     toggleBluetooth: state.toggleBluetooth,
+    toggleAirdrop: state.toggleAirdrop,
     toggleDark: state.toggleDark,
     toggleFullScreen: state.toggleFullScreen,
     setVolume: state.setVolume,
@@ -206,8 +223,111 @@ export default function SystemPreferences() {
             </div>
           </div>
         );
+      case "airdrop":
+        return (
+          <div className="space-y-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">AirDrop</h2>
+            <div className="flex items-center justify-between p-4 rounded-lg bg-gray-500/10">
+              <div className="flex flex-col">
+                <span className="font-semibold">AirDrop Visibility</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Allow others to send files to this Mac.
+                </span>
+              </div>
+              <button
+                onClick={toggleAirdrop}
+                className={`w-12 h-6 rounded-full transition-colors relative ${airdrop ? "bg-blue-500" : "bg-gray-400"}`}
+              >
+                <div
+                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${airdrop ? "translate-x-7" : "translate-x-1"}`}
+                />
+              </button>
+            </div>
+          </div>
+        );
+      case "general":
+        return (
+          <div className="space-y-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">General</h2>
+            <div className="flex flex-col p-4 rounded-lg bg-gray-500/10 space-y-4">
+              <div className="flex justify-between items-center pb-3 border-b border-gray-500/30">
+                <span>About</span>
+                <span className="i-bi:chevron-right text-c-500" />
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-gray-500/30">
+                <span>Software Update</span>
+                <span className="i-bi:chevron-right text-c-500" />
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-gray-500/30">
+                <span>Storage</span>
+                <span className="i-bi:chevron-right text-c-500" />
+              </div>
+              <div className="flex justify-between items-center">
+                <span>AirDrop & Handoff</span>
+                <span className="i-bi:chevron-right text-c-500" />
+              </div>
+            </div>
+          </div>
+        );
+      case "battery":
+        return (
+          <div className="space-y-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Battery</h2>
+            <div className="flex flex-col p-6 rounded-lg bg-gray-500/10 space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-3xl font-bold">
+                    {(batteryState.level * 100).toFixed()}%
+                  </span>
+                  <span
+                    className={`text-sm ${batteryState.charging ? "text-green-600 dark:text-green-400" : "text-gray-600 dark:text-gray-400"}`}
+                  >
+                    {batteryState.charging ? "Charging" : "Running on Battery"}
+                  </span>
+                </div>
+                <span
+                  className={`${batteryState.charging ? "i-bi:battery-charging text-green-500" : "i-bi:battery-half text-gray-500"} text-5xl`}
+                />
+              </div>
+              <div className="h-px bg-gray-500/30 my-2" />
+              <div className="flex justify-between items-center">
+                <span>Low Power Mode</span>
+                <button className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm hover:opacity-80">
+                  Never
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      case "privacy":
+        return (
+          <div className="space-y-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Privacy & Security</h2>
+            <div className="flex flex-col bg-gray-500/10 rounded-lg overflow-hidden">
+              {[
+                { title: "Location Services", status: "On" },
+                { title: "Contacts", status: "2 Apps" },
+                { title: "Calendars", status: "0 Apps" },
+                { title: "Photos", status: "4 Apps" },
+                { title: "Microphone", status: "1 App" },
+                { title: "Camera", status: "2 Apps" }
+              ].map((item, i) => (
+                <div
+                  key={item.title}
+                  className={`flex justify-between p-3 ${i !== 5 ? "border-b border-gray-500/30" : ""}`}
+                >
+                  <span>{item.title}</span>
+                  <div className="flex items-center text-gray-500 dark:text-gray-400 space-x-2">
+                    <span className="text-sm">{item.status}</span>
+                    <span className="i-bi:chevron-right" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
       default:
-        return <div>Select a category</div>;
+        return <div className="text-gray-500 mt-10">Select a category</div>;
     }
   };
 
