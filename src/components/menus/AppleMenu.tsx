@@ -9,6 +9,8 @@ interface AppleMenuProps {
   btnRef: React.RefObject<HTMLDivElement>;
   closeAllApps: () => void;
   openApp: (id: string) => void;
+  recentApps: string[];
+  setRecentApps: (apps: string[]) => void;
 }
 
 export default function AppleMenu({
@@ -19,7 +21,9 @@ export default function AppleMenu({
   toggleAppleMenu,
   btnRef,
   closeAllApps,
-  openApp
+  openApp,
+  recentApps,
+  setRecentApps
 }: AppleMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [showRecent, setShowRecent] = useState(false);
@@ -72,33 +76,29 @@ export default function AppleMenu({
           {showRecent && (
             <div className="absolute left-full top-0 ml-1 w-48 text-c-black bg-c-200/90 border border-menu rounded-lg shadow-menu">
               <MenuItemGroup border={false}>
-                <MenuItem
-                  onClick={() => {
-                    openApp("safari");
-                    toggleAppleMenu();
-                  }}
-                >
-                  Safari
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    openApp("terminal");
-                    toggleAppleMenu();
-                  }}
-                >
-                  Terminal
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    openApp("bear");
-                    toggleAppleMenu();
-                  }}
-                >
-                  Finder
-                </MenuItem>
+                {recentApps.length > 0 ? (
+                  recentApps.map((app) => (
+                    <MenuItem
+                      key={app}
+                      onClick={() => {
+                        openApp(app);
+                        toggleAppleMenu();
+                      }}
+                    >
+                      {app === "bear"
+                        ? "Finder"
+                        : app.charAt(0).toUpperCase() + app.slice(1)}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <div className="px-5 py-1 text-gray-500 text-sm cursor-default">
+                    None
+                  </div>
+                )}
                 <div className="h-px bg-gray-500/50 my-1 mx-2" />
                 <MenuItem
                   onClick={() => {
+                    setRecentApps([]);
                     toggleAppleMenu();
                   }}
                 >

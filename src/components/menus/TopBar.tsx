@@ -77,6 +77,7 @@ const TopBar = (props: TopBarProps) => {
     showWifiMenu: false,
     showAppleMenu: false
   });
+  const [recentApps, setRecentApps] = useState<string[]>(["safari", "terminal", "bear"]);
 
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [audio, audioState, controls, audioRef] = useAudio({
@@ -198,6 +199,8 @@ const TopBar = (props: TopBarProps) => {
           btnRef={appleBtnRef}
           closeAllApps={props.closeAllApps}
           openApp={props.openApp}
+          recentApps={recentApps}
+          setRecentApps={setRecentApps}
         />
       )}
 
