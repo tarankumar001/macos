@@ -268,6 +268,7 @@ export default function Desktop(props: MacActions) {
         hide={state.hideDockAndTopbar}
         setSpotlightBtnRef={setSpotlightBtnRef}
         closeAllApps={closeAllApps}
+        openApp={openApp}
       />
 
       {/* Desktop Apps */}

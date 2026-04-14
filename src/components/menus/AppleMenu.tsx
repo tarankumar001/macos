@@ -8,6 +8,7 @@ interface AppleMenuProps {
   toggleAppleMenu: () => void;
   btnRef: React.RefObject<HTMLDivElement>;
   closeAllApps: () => void;
+  openApp: (id: string) => void;
 }
 
 export default function AppleMenu({
@@ -17,35 +18,150 @@ export default function AppleMenu({
   sleep,
   toggleAppleMenu,
   btnRef,
-  closeAllApps
+  closeAllApps,
+  openApp
 }: AppleMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [showRecent, setShowRecent] = useState(false);
 
   useClickOutside(ref, toggleAppleMenu, [btnRef]);
 
   return (
     <div className="menu-box left-2 w-56" ref={ref}>
       <MenuItemGroup>
-        <MenuItem>About This Mac</MenuItem>
+        <MenuItem
+          onClick={() => {
+            openApp("about");
+            toggleAppleMenu();
+          }}
+        >
+          About This Mac
+        </MenuItem>
       </MenuItemGroup>
       <MenuItemGroup>
-        <MenuItem>System Preferences...</MenuItem>
-        <MenuItem>App Store...</MenuItem>
+        <MenuItem
+          onClick={() => {
+            openApp("system-preferences");
+            toggleAppleMenu();
+          }}
+        >
+          System Preferences...
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            openApp("app-store");
+            toggleAppleMenu();
+          }}
+        >
+          App Store...
+        </MenuItem>
       </MenuItemGroup>
       <MenuItemGroup>
-        <MenuItem>Recent Items</MenuItem>
+        <div
+          className="relative"
+          onMouseEnter={() => setShowRecent(true)}
+          onMouseLeave={() => setShowRecent(false)}
+        >
+          <MenuItem>
+            <div className="flex justify-between w-full items-center">
+              <span>Recent Items</span>
+              <span className="i-bi:chevron-right text-c-500" />
+            </div>
+          </MenuItem>
+
+          {showRecent && (
+            <div className="absolute left-full top-0 ml-1 w-48 text-c-black bg-c-200/90 border border-menu rounded-lg shadow-menu">
+              <MenuItemGroup border={false}>
+                <MenuItem
+                  onClick={() => {
+                    openApp("safari");
+                    toggleAppleMenu();
+                  }}
+                >
+                  Safari
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    openApp("terminal");
+                    toggleAppleMenu();
+                  }}
+                >
+                  Terminal
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    openApp("bear");
+                    toggleAppleMenu();
+                  }}
+                >
+                  Finder
+                </MenuItem>
+                <div className="h-px bg-gray-500/50 my-1 mx-2" />
+                <MenuItem
+                  onClick={() => {
+                    toggleAppleMenu();
+                  }}
+                >
+                  Clear Menu
+                </MenuItem>
+              </MenuItemGroup>
+            </div>
+          )}
+        </div>
       </MenuItemGroup>
       <MenuItemGroup>
-        <MenuItem onClick={closeAllApps}>Force Quit...</MenuItem>
+        <MenuItem
+          onClick={() => {
+            closeAllApps();
+            toggleAppleMenu();
+          }}
+        >
+          Force Quit...
+        </MenuItem>
       </MenuItemGroup>
       <MenuItemGroup>
-        <MenuItem onClick={sleep}>Sleep</MenuItem>
-        <MenuItem onClick={restart}>Restart...</MenuItem>
-        <MenuItem onClick={shut}>Shut Down...</MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            sleep(e);
+            toggleAppleMenu();
+          }}
+        >
+          Sleep
+        </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            restart(e);
+            toggleAppleMenu();
+          }}
+        >
+          Restart...
+        </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            shut(e);
+            toggleAppleMenu();
+          }}
+        >
+          Shut Down...
+        </MenuItem>
       </MenuItemGroup>
       <MenuItemGroup border={false}>
-        <MenuItem onClick={logout}>Lock Screen</MenuItem>
-        <MenuItem onClick={logout}>Log Out Tarankumar...</MenuItem>
+        <MenuItem
+          onClick={() => {
+            logout();
+            toggleAppleMenu();
+          }}
+        >
+          Lock Screen
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            logout();
+            toggleAppleMenu();
+          }}
+        >
+          Log Out Tarankumar...
+        </MenuItem>
       </MenuItemGroup>
     </div>
   );

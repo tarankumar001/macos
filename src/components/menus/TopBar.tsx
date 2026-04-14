@@ -55,6 +55,7 @@ interface TopBarProps extends MacActions {
   hide: boolean;
   toggleSpotlight: () => void;
   closeAllApps: () => void;
+  openApp: (id: string) => void;
 }
 
 interface TopBarState {
@@ -196,6 +197,7 @@ const TopBar = (props: TopBarProps) => {
           toggleAppleMenu={toggleAppleMenu}
           btnRef={appleBtnRef}
           closeAllApps={props.closeAllApps}
+          openApp={props.openApp}
         />
       )}
 

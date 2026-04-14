@@ -1,5 +1,8 @@
 import { appBarHeight } from "~/utils";
 import type { AppsData } from "~/types";
+import AboutThisMac from "~/components/apps/AboutThisMac";
+import SystemPreferences from "~/components/apps/SystemPreferences";
+import AppStore from "~/components/apps/AppStore";
 
 const apps: AppsData[] = [
   {
@@ -7,6 +10,36 @@ const apps: AppsData[] = [
     title: "Launchpad",
     desktop: false,
     img: "img/icons/launchpad.png"
+  },
+  {
+    id: "about",
+    title: "About This Mac",
+    desktop: true,
+    width: 300,
+    height: 300,
+    show: false,
+    img: "img/icons/launchpad.png",
+    content: <AboutThisMac />
+  },
+  {
+    id: "system-preferences",
+    title: "System Preferences",
+    desktop: true,
+    width: 600,
+    height: 500,
+    show: false,
+    img: "img/icons/launchpad.png",
+    content: <SystemPreferences />
+  },
+  {
+    id: "app-store",
+    title: "App Store",
+    desktop: true,
+    width: 800,
+    height: 600,
+    show: false,
+    img: "img/icons/launchpad.png",
+    content: <AppStore />
   },
   {
     id: "bear",

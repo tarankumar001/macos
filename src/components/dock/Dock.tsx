@@ -48,21 +48,28 @@ export default function Dock({
           height: `${(dockSize + 15) / 16}rem`
         }}
       >
-        {apps.map((app) => (
-          <DockItem
-            key={`dock-${app.id}`}
-            id={app.id}
-            title={app.title}
-            img={app.img}
-            mouseX={mouseX}
-            desktop={app.desktop}
-            openApp={openApp}
-            isOpen={app.desktop && showApps[app.id]}
-            link={app.link}
-            dockSize={dockSize}
-            dockMag={dockMag}
-          />
-        ))}
+        {apps
+          .filter(
+            (app) =>
+              app.id !== "about" &&
+              app.id !== "system-preferences" &&
+              app.id !== "app-store"
+          )
+          .map((app) => (
+            <DockItem
+              key={`dock-${app.id}`}
+              id={app.id}
+              title={app.title}
+              img={app.img}
+              mouseX={mouseX}
+              desktop={app.desktop}
+              openApp={openApp}
+              isOpen={app.desktop && showApps[app.id]}
+              link={app.link}
+              dockSize={dockSize}
+              dockMag={dockMag}
+            />
+          ))}
       </ul>
     </div>
   );
