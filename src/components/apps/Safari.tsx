@@ -31,29 +31,30 @@ const NavSection = ({ width, section, setGoURL }: NavSectionProps) => {
       </div>
       <div className={`mt-3 grid grid-flow-row ${grid}`}>
         {section.sites.map((site: SiteData) => (
-          <div key={`safari-nav-${site.id}`} className="h-28 flex flex-col">
-            <div className="size-16 mx-auto rounded-md overflow-hidden bg-white">
+          <div key={`safari-nav-${site.id}`} className="h-28 flex flex-col items-center">
+            <div
+              className="size-16 mx-auto rounded-md overflow-hidden bg-white cursor-pointer hover:opacity-85 transition-opacity"
+              onClick={() => window.open(site.link, "_blank", "noreferrer")}
+            >
               {site.img ? (
                 <img
                   src={site.img}
                   alt={site.title}
                   title={site.title}
-                  onClick={
-                    site.inner ? () => setGoURL(site.link) : () => window.open(site.link)
-                  }
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <div
-                  className="size-full flex-center cursor-default text-black"
-                  onClick={
-                    site.inner ? () => setGoURL(site.link) : () => window.open(site.link)
-                  }
-                >
+                <div className="size-full flex-center text-black">
                   <span text-lg>{site.title}</span>
                 </div>
               )}
             </div>
-            <span m="t-2 x-auto" text-sm>
+            <span
+              m="t-2 x-auto"
+              text-sm
+              className="cursor-pointer hover:underline"
+              onClick={() => window.open(site.link, "_blank", "noreferrer")}
+            >
               {site.title}
             </span>
           </div>
@@ -139,18 +140,26 @@ const Safari = ({ width }: SafariProps) => {
   });
 
   const setGoURL = (url: string) => {
-    const isValid = checkURL(url);
+    if (!url || url.trim() === "") return;
+
+    let targetURL = url.trim();
+    const isValid = checkURL(targetURL);
 
     if (isValid) {
-      if (url.substring(0, 7) !== "http://" && url.substring(0, 8) !== "https://")
-        url = `https://${url}`;
-    } else if (url !== "") {
-      url = `https://www.bing.com/search?q=${url}`;
+      if (
+        targetURL.substring(0, 7) !== "http://" &&
+        targetURL.substring(0, 8) !== "https://"
+      ) {
+        targetURL = `https://${targetURL}`;
+      }
+    } else {
+      targetURL = `https://www.google.com/search?q=${encodeURIComponent(targetURL)}`;
     }
 
+    window.open(targetURL, "_blank", "noreferrer");
     setState({
-      goURL: url,
-      currentURL: url
+      goURL: "",
+      currentURL: targetURL
     });
   };
 
@@ -159,7 +168,7 @@ const Safari = ({ width }: SafariProps) => {
     if (keyCode === "Enter") setGoURL((e.target as HTMLInputElement).value);
   };
 
-  const buttonColor = state.goURL === "" ? "text-c-400" : "text-c-700";
+  const buttonColor = state.currentURL === "" ? "text-c-400" : "text-c-700";
   const grid = (width as number) < 640 ? "grid-cols-2" : "grid-cols-3";
   const hideLast = (width as number) < 640 ? "hidden" : "flex";
 
@@ -170,7 +179,7 @@ const Safari = ({ width }: SafariProps) => {
         <div className="flex px-2">
           <button
             className={`safari-btn w-7 ${buttonColor}`}
-            onClick={() => setGoURL("")}
+            onClick={() => setState({ goURL: "", currentURL: "" })}
           >
             <span className="i-jam:chevron-left text-xl" />
           </button>
