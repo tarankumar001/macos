@@ -35,14 +35,6 @@ const bear: BearData[] = [
     icon: "i-octicon:repo",
     md: [
       {
-        id: "porjects-zip",
-        title: "porjects.zip",
-        file: "markdown/porjects-zip.md",
-        icon: "i-ri:file-zip-line",
-        excerpt: "Download porjects.zip archive...",
-        link: "/porjects.zip"
-      },
-      {
         id: "Echohire",
         title: "Echohire",
         file: "https://raw.githubusercontent.com/tarankumar001/ai-mock-interview/master/README.md",

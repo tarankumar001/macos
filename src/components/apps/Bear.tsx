@@ -61,14 +61,6 @@ const Sidebar = ({ cur, setMidBar }: SidebarProps) => {
   return (
     <div text-white>
       <div className="h-12 pr-3 hstack space-x-3 justify-end">
-        <a
-          href="/porjects.zip"
-          download="porjects.zip"
-          title="Download porjects.zip"
-          className="text-white hover:text-gray-300 transition-colors cursor-pointer flex items-center"
-        >
-          <span className="i-ri:download-line text-xl" />
-        </a>
         <span className="i-ic:baseline-cloud-off text-xl" />
         <span className="i-akar-icons:settings-vertical text-xl" />
       </div>
